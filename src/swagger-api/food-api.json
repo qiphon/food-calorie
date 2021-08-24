@@ -1,0 +1,550 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0",
+    "title": "Food Databse API",
+    "description": "The Edamam B2B API is accessed by sending HTTPS requests on specific URLs as described below. The base URL is https://api.edamam.com, and you obtain the full URL by appending request鈥檚 path to the base URL, for example, https://api.edamam.com/api/food-database/v2/parser. \n \n Our Food Database API allows you to search for nutrition and diet information within our Food Database. "
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "api.edamam.com",
+  "tags": [
+    {
+      "name": "Food Request Step 2 - Parser"
+    },
+    {
+      "name": "Food Request Step 1 - Nutrients"
+    },
+    {
+      "name": "Food Search Autocomplete"
+    }
+  ],
+  "paths": {
+    "/api/food-database/v2/parser": {
+      "get": {
+        "tags": [
+          "Food Request Step 2 - Parser"
+        ],
+        "summary": "<b>Click here to view the documentation</b>",
+        "description": "The parser access point handles text search for foods as well as filters for the foods like presence specific nutrient content or exclusion of allergens",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "query",
+            "x-data-threescale-name": "app_ids",
+            "description": "The application ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "app_key",
+            "in": "query",
+            "x-data-threescale-name": "app_keys",
+            "description": "The application key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ingr",
+            "in": "query",
+            "description": "A keyword search parameter to be found in the food name. Not required when upc is present",
+            "type": "string"
+          },
+          {
+            "name": "upc",
+            "in": "query",
+            "description": " valid UPC code. Not required when ingr is present",
+            "type": "string"
+          },
+          {
+            "name": "nutrition-type",
+            "in": "query",
+            "description": "Select between cooking and food logging processor.",
+            "type": "string",
+            "default": "cooking",
+            "enum": [
+              "cooking",
+              "logging"
+            ]
+          },
+          {
+            "name": "health",
+            "in": "query",
+            "description": "Health label",
+            "type": "array",
+            "collectionFormat": "multi",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "alcohol-free",
+                "celery-free",
+                "crustacean-free",
+                "dairy-free",
+                "egg-free",
+                "fish-free",
+                "fodmap-free",
+                "gluten-free",
+                "immuno-supportive",
+                "keto-friendly",
+                "kidney-friendly",
+                "kosher",
+                "low-fat-abs",
+                "low-potassium",
+                "low-sugar",
+                "lupine-free",
+                "mustard-free",
+                "no-oil-added",
+                "paleo",
+                "peanut-free",
+                "pescatarian",
+                "pork-free",
+                "red-meat-free",
+                "sesame-free",
+                "shellfish-free",
+                "soy-free",
+                "sugar-conscious",
+                "tree-nut-free",
+                "vegan",
+                "vegetarian",
+                "wheat-free"
+              ]
+            }
+          },
+          {
+            "name": "calories",
+            "in": "query",
+            "description": "The format is calories=RANGE where RANGE is replaced by the value in kcal. RANGE is in one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. The + symbol needs to be properly encoded. Examples: 鈥渃alories=100-300鈥� will return all recipes with which have between 100 and 300 kcal per serving.",
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Categories",
+            "type": "array",
+            "collectionFormat": "multi",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "generic-foods",
+                "generic-meals",
+                "packaged-foods",
+                "fast-foods"
+              ]
+            }
+          },
+          {
+            "name": "nutrients[CA]",
+            "in": "query",
+            "description": "Calcium unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> For example: nutrients[CA]=50+ means minimum 50mg calcium, where 鈥�50+鈥� has to be properly encoded as 鈥�50%2B鈥� nutrients[FAT]=30 means maximum 30g fat and nutrients[FE]=5-10 means iron between 5mg and 10mg inclusive",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[CHOCDF]",
+            "in": "query",
+            "description": "Carbs unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[CHOLE]",
+            "in": "query",
+            "description": "Cholesterol unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br>See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FAMS]",
+            "in": "query",
+            "description": "Monounsaturated unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FAPU]",
+            "in": "query",
+            "description": "Polyunsaturated unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FASAT]",
+            "in": "query",
+            "description": "Saturated unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FAT]",
+            "in": "query",
+            "description": "Fat unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FATRN]",
+            "in": "query",
+            "description": "Trans unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FE]",
+            "in": "query",
+            "description": "Iron unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FIBTG]",
+            "in": "query",
+            "description": "Fiber unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[FOLDFE]",
+            "in": "query",
+            "description": "Folate (Equivalent) unit - 忙g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[K]",
+            "in": "query",
+            "description": "Potassium unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[MG]",
+            "in": "query",
+            "description": "Magnesium unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[NA]",
+            "in": "query",
+            "description": "Sodium unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[ENERC_KCAL]",
+            "in": "query",
+            "description": "Energy unit - kcal. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[NIA]",
+            "in": "query",
+            "description": "Niacin (B3) unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[P]",
+            "in": "query",
+            "description": "Phosphorus unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[PROCNT]",
+            "in": "query",
+            "description": "Protein unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[RIBF]",
+            "in": "query",
+            "description": "Riboflavin (B2) unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[SUGAR]",
+            "in": "query",
+            "description": "Sugars unit - g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[THIA]",
+            "in": "query",
+            "description": "Thiamin (B1) unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[TOCPHA]",
+            "in": "query",
+            "description": "Vitamin E unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[VITA_RAE]",
+            "in": "query",
+            "description": "Vitamin A unit - 忙g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[VITB12]",
+            "in": "query",
+            "description": "Vitamin B12 unit - 忙g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[VITB6A]",
+            "in": "query",
+            "description": "Vitamin B6 unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[VITC]",
+            "in": "query",
+            "description": "Vitamin C unit - mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[VITD]",
+            "in": "query",
+            "description": "Vitamin D unit - 忙g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          },
+          {
+            "name": "nutrients[VITK1]",
+            "in": "query",
+            "description": "Vitamin K unit - 忙g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. <br> <br> See calcium for an example for how to fill in the range.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of food objects, with each food object containing: kcal per 100gr, protein per 100 grams, carbohydrates per 100 grams, brand of the food, if the food is generic or brandid, a list of existing measures for the food, contents label of the food"
+          },
+          "404": {
+            "description": "The specified URL was not found or couldn鈥檛 be retrieved"
+          }
+        }
+      }
+    },
+    "/api/food-database/v2/nutrients": {
+      "post": {
+        "tags": [
+          "Food Request Step 1 - Nutrients"
+        ],
+        "summary": "<b>Click here to view the documentation</b>",
+        "description": "In the response to your parser request you receive the a food ID for each database match. Using the food ID and the measure URI which parser provides you can make a request to the nutrients acces point. The nutrients access points returns nutrition with diet and health labels for a given quantity of the food.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "query",
+            "x-data-threescale-name": "app_ids",
+            "description": "App ID from your dashboard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "app_key",
+            "in": "query",
+            "x-data-threescale-name": "app_keys",
+            "description": "App key from your dashboard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ingredients",
+            "in": "body",
+            "description": "Using the food ID and the measure URI which parser provides you can make a request to the nutrients acces point. The nutrients access points returns nutrition with diet and health labels for a given quantity of the food.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Object containing number of servings (yield), total calories for the food (calories), nutrient content by nutrient type (totalNutrients, totalDaily), diet and health classification (dietLabels, healthLabels)"
+          },
+          "404": {
+            "description": "The specified URL was not found or couldn鈥檛 be retrieved"
+          },
+          "422": {
+            "description": "Couldn鈥檛 parse the request or extract the nutritional info"
+          },
+          "555": {
+            "description": "Text with insufficient quality to process correctly"
+          }
+        }
+      }
+    },
+    "/auto-complete": {
+      "get": {
+        "tags": [
+          "Food Search Autocomplete"
+        ],
+        "summary": "<b>Click here to view the documentation</b>",
+        "description": "The parser access point handles text search for foods as well as filters for the foods like presence specific nutrient content or exclusion of allergens",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "query",
+            "x-data-threescale-name": "app_ids",
+            "description": "The application ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "app_key",
+            "in": "query",
+            "x-data-threescale-name": "app_keys",
+            "description": "The application key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query text. For example q=chi. This or the r parameter are required",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "response limit",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Object containing number of servings (yield), total calories for the food (calories), nutrient content by nutrient type (totalNutrients, totalDaily), diet and health classification (dietLabels, healthLabels)"
+          }
+        }
+      }
+    },
+    "/api/menu-items/v2/search": {
+      "get": {
+        "tags": [
+          "Menu Search Requests"
+        ],
+        "summary": "<b>Click here to view the documentation</b>",
+        "description": "This endpoint searches through our menu-item database (aka 鈥渞estaurant-foods鈥�). In addition to full text search and health-labels restrictions (both similar to the parser/ingr combination in the food-database,) the menu search also allows for geo-distance searching with a center point and distance. /n /nThis location based search is only available for locations in the United States.",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "query",
+            "x-data-threescale-name": "app_ids",
+            "description": "The application ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "app_key",
+            "in": "query",
+            "x-data-threescale-name": "app_keys",
+            "description": "The application key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A keyword search parameter to be found in the food name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "health",
+            "in": "query",
+            "description": "Health label",
+            "type": "array",
+            "collectionFormat": "multi",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "alcohol-free",
+                "celery-free",
+                "crustacean-free",
+                "dairy-free",
+                "egg-free",
+                "fish-free",
+                "fodmap-free",
+                "gluten-free",
+                "immuno-supportive",
+                "keto-friendly",
+                "kidney-friendly",
+                "kosher",
+                "low-fat-abs",
+                "low-potassium",
+                "low-sugar",
+                "lupine-free",
+                "mustard-free",
+                "no-oil-added",
+                "paleo",
+                "peanut-free",
+                "pescatarian",
+                "pork-free",
+                "red-meat-free",
+                "sesame-free",
+                "shellfish-free",
+                "soy-free",
+                "sugar-conscious",
+                "tree-nut-free",
+                "vegan",
+                "vegetarian",
+                "wheat-free"
+              ]
+            }
+          },
+          {
+            "name": "postal",
+            "in": "query",
+            "description": "US postal code",
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The geographical latitude coordinates of the center, e.g. 39.953435820715",
+            "type": "integer"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "The geographical longitude coordinates of the center, e.g. -75.2028386343662",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Object containing number of servings (yield), total calories for the food (calories), nutrient content by nutrient type (totalNutrients, totalDaily), diet and health classification (dietLabels, healthLabels)"
+          },
+          "400": {
+            "description": "Unsupported search request with extra information in the message"
+          },
+          "404": {
+            "description": "The specified URL was not found or couldn鈥檛 be retrieved"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ingredients": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "number"
+        },
+        "measureURI": {
+          "type": "string"
+        },
+        "foodID": {
+          "type": "string"
+        }
+      }
+    },
+    "List": {
+      "type": "object",
+      "properties": {
+        "ingredients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ingredients"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.mainRow {
+  height: 100vh;
+  padding: 24px;
+  display: flex;
+
+  .content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column;
+    height: 100%;
+    width: 50%;
+
+    > div {
+      flex: 1 1 auto;
+    }
+
+    > div:first-child {
+      height: 80px;
+      flex: 0 0 auto;
+    }
+  }
+}

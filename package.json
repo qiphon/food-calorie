@@ -6,16 +6,35 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/react-query": "^1.2.9",
+    "antd": "^4.16.12",
+    "axios": "^0.21.1",
+    "lodash-es": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.21.0",
+    "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.1",
     "web-vitals": "^1.0.1"
   },
+  "devDependencies": {
+    "@craco/craco": "^6.2.0",
+    "@types/lodash-es": "^4.17.4",
+    "@types/react": "^17.0.18",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.18",
+    "craco-antd": "^1.19.0",
+    "node-sass": "^6.0.1",
+    "quicktype": "^15.0.260",
+    "typescript": "^4.3.5"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "apiinterface": "quicktype --src ./src/swagger-api -l ts -o ./src/api-interface/index.ts --just-types"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +53,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://api.edamam.com"
 }

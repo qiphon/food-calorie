@@ -1,0 +1,21 @@
+.foodlist {
+  overflow: auto;
+  .foodItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+  }
+  .foodItem + .foodItem {
+    border-top: 1px solid #ccc;
+  }
+  .foodName {
+    flex: 0 1 30%;
+  }
+  .inputNums {
+    flex: 1 1 auto;
+    max-width: 100px;
+  }
+  .foodOperation {
+    width: 80px;
+  }
+}
